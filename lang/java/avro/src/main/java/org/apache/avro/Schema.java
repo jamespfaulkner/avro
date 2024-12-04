@@ -539,7 +539,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
 
         @Override
         protected Field createField(String name, Schema schema, String doc, JsonNode defaultValue, boolean validate,
-            Order order) {
+                                    Order order) {
           return new Field(name, schema, doc, defaultValue, validate, order);
         }
       });
@@ -1858,11 +1858,10 @@ public abstract class Schema extends JsonProperties implements Serializable {
   }
 
   private static Schema parseRecord(JsonNode schema, ParseContext context, String currentNameSpace,
-      boolean isTypeError) {
+                                    boolean isTypeError) {
     Name name = parseName(schema, currentNameSpace);
     String doc = parseDoc(schema);
     Schema result = new RecordSchema(name, doc, isTypeError);
-    context.put(result);
 
     JsonNode fieldsNode = schema.get("fields");
     if (fieldsNode == null || !fieldsNode.isArray())
@@ -1877,6 +1876,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
             name, f.name(), getOptionalText(field, "logicalType"));
     }
     result.setFields(fields);
+    context.put(result);
     parsePropertiesAndLogicalType(schema, result, SCHEMA_RESERVED);
     parseAliases(schema, result);
     return result;
@@ -2081,7 +2081,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
 
   @SuppressWarnings("DataFlowIssue")
   private static Schema applyAliases(Schema s, Map<Schema, Schema> seen, Map<Name, Name> aliases,
-      Map<Name, Map<String, String>> fieldAliases) {
+                                     Map<Name, Map<String, String>> fieldAliases) {
 
     Name name = s instanceof NamedSchema ? ((NamedSchema) s).name : null;
     Schema result = s;
@@ -2137,7 +2137,7 @@ public abstract class Schema extends JsonProperties implements Serializable {
 
   @SuppressWarnings("DataFlowIssue")
   private static void getAliases(Schema schema, Map<Schema, Schema> seen, Map<Name, Name> aliases,
-      Map<Name, Map<String, String>> fieldAliases) {
+                                 Map<Name, Map<String, String>> fieldAliases) {
     if (schema instanceof NamedSchema) {
       NamedSchema namedSchema = (NamedSchema) schema;
       if (namedSchema.aliases != null)
