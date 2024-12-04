@@ -221,14 +221,14 @@ public class TestSchema {
   @Test
   void serialization() throws IOException, ClassNotFoundException {
     try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
-         ObjectOutputStream oos = new ObjectOutputStream(bos);
-         InputStream jsonSchema = getClass().getResourceAsStream("/SchemaBuilder.avsc")) {
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        InputStream jsonSchema = getClass().getResourceAsStream("/SchemaBuilder.avsc")) {
 
       Schema payload = new Schema.Parser().parse(jsonSchema);
       oos.writeObject(payload);
 
       try (ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
-           ObjectInputStream ois = new ObjectInputStream(bis)) {
+          ObjectInputStream ois = new ObjectInputStream(bis)) {
         Schema sp = (Schema) ois.readObject();
         assertEquals(payload, sp);
       }
