@@ -1,0 +1,11 @@
+{
+  "namespace": "model",
+  "type" : "record",
+  "name" : "EmbeddedRecord",
+  "fields" : [
+    {
+      "name" : "uuid",
+      "type" : "string"
+    }
+  ]
+}
