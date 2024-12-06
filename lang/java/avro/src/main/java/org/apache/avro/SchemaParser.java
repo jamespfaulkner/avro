@@ -269,6 +269,7 @@ public class SchemaParser {
    *
    * @return all parsed schemas, in the order they were parsed
    */
+  // TODO here, Collection
   public List<Schema> getParsedNamedSchemas() {
     return parseContext.resolveAllSchemas();
   }

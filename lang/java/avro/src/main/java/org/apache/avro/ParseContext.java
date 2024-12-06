@@ -281,9 +281,14 @@ public class ParseContext {
    * @return all parsed schemas, in the order they were parsed
    * @throws AvroTypeException if a schema reference cannot be resolved
    */
+  // TODO when this is a set, TestIdlReader.runTests fails
+  // when it is a list, another test fails because
+  // org.apache.avro.Protocol::equals (line 406, that.context.resolveAllSchemas())
+  // is in a different order
   public List<Schema> resolveAllSchemas() {
     ensureSchemasAreResolved();
 
+    // return new HashSet<>(oldSchemas.values());
     return new ArrayList<>(oldSchemas.values());
   }
 

@@ -72,6 +72,7 @@ public class IdlFile {
       synchronized (resolveLock) {
         if (parseContext != null) {
           parseContext.commit();
+          // TODO
           List<Schema> schemas = parseContext.resolveAllSchemas();
           schemas.forEach(schema -> namedSchemas.put(schema.getFullName(), schema));
           if (mainSchema != null) {

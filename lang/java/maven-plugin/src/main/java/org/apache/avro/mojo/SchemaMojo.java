@@ -26,6 +26,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +71,9 @@ public class SchemaMojo extends AbstractAvroMojo {
         .map((String filename) -> new File(sourceDirectory, filename)).collect(Collectors.toList());
     final File sourceFileForModificationDetection = sourceFiles.stream().filter(file -> file.lastModified() > 0)
         .max(Comparator.comparing(File::lastModified)).orElse(null);
-    final List<Schema> schemas;
+    // TODO
+    final Collection<Schema> schemas;
+    //final List<Schema> schemas;
 
     try {
       // This is necessary to maintain backward-compatibility. If there are
